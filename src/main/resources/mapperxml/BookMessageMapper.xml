@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pkurw.bookstore.mapper.bookMessageMapper">
-  <resultMap id="BaseResultMap" type="com.pkurw.bookstore.bean.bookMessage">
+<mapper namespace="com.pkurw.bookstore.mapper.BookMessageMapper">
+  <resultMap id="BaseResultMap" type="com.pkurw.bookstore.bean.BookMessage">
     <id column="book_id" jdbcType="INTEGER" property="bookId" />
     <result column="bname" jdbcType="VARCHAR" property="bname" />
     <result column="book_number" jdbcType="INTEGER" property="bookNumber" />
@@ -70,37 +70,30 @@
   <sql id="Base_Column_List">
     book_id, bname, book_number, author, status, book_amount
   </sql>
-  <select id="selectByExample" parameterType="com.pkurw.bookstore.bean.bookMessageExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from book_message
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from book_message
     where book_id = #{bookId,jdbcType=INTEGER}
   </select>
+  <select id="selectByBookName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from book_message
+    where book_name = #{bookName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByBookAuthor" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from book_message
+    where author = #{Author,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from book_message
     where book_id = #{bookId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.pkurw.bookstore.bean.bookMessageExample">
-    delete from book_message
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.pkurw.bookstore.bean.bookMessage">
+
+  <insert id="insert" parameterType="com.pkurw.bookstore.bean.BookMessage">
     insert into book_message (book_id, bname, book_number, 
       author, status, book_amount
       )
@@ -108,7 +101,7 @@
       #{author,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{bookAmount,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.pkurw.bookstore.bean.bookMessage">
+  <insert id="insertSelective" parameterType="com.pkurw.bookstore.bean.BookMessage">
     insert into book_message
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="bookId != null">
@@ -151,51 +144,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.pkurw.bookstore.bean.bookMessageExample" resultType="java.lang.Long">
-    select count(*) from book_message
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update book_message
-    <set>
-      <if test="record.bookId != null">
-        book_id = #{record.bookId,jdbcType=INTEGER},
-      </if>
-      <if test="record.bname != null">
-        bname = #{record.bname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.bookNumber != null">
-        book_number = #{record.bookNumber,jdbcType=INTEGER},
-      </if>
-      <if test="record.author != null">
-        author = #{record.author,jdbcType=VARCHAR},
-      </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=VARCHAR},
-      </if>
-      <if test="record.bookAmount != null">
-        book_amount = #{record.bookAmount,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update book_message
-    set book_id = #{record.bookId,jdbcType=INTEGER},
-      bname = #{record.bname,jdbcType=VARCHAR},
-      book_number = #{record.bookNumber,jdbcType=INTEGER},
-      author = #{record.author,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=VARCHAR},
-      book_amount = #{record.bookAmount,jdbcType=INTEGER}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pkurw.bookstore.bean.bookMessage">
+  <update id="updateByPrimaryKeySelective" parameterType="com.pkurw.bookstore.bean.BookMessage">
     update book_message
     <set>
       <if test="bname != null">
@@ -216,7 +165,7 @@
     </set>
     where book_id = #{bookId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.pkurw.bookstore.bean.bookMessage">
+  <update id="updateByPrimaryKey" parameterType="com.pkurw.bookstore.bean.BookMessage">
     update book_message
     set bname = #{bname,jdbcType=VARCHAR},
       book_number = #{bookNumber,jdbcType=INTEGER},

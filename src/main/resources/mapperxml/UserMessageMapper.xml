@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pkurw.bookstore.mapper.userMessageMapper">
-  <resultMap id="BaseResultMap" type="com.pkurw.bookstore.bean.userMessage">
+<mapper namespace="com.pkurw.bookstore.mapper.UserMessageMapper">
+  <resultMap id="BaseResultMap" type="com.pkurw.bookstore.bean.UserMessage">
     <id column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="create_Time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="username" jdbcType="VARCHAR" property="username" />
@@ -68,20 +68,6 @@
   <sql id="Base_Column_List">
     user_id, create_Time, username, gender
   </sql>
-  <select id="selectByExample" parameterType="com.pkurw.bookstore.bean.userMessageExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from user_message
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -92,19 +78,13 @@
     delete from user_message
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.pkurw.bookstore.bean.userMessageExample">
-    delete from user_message
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.pkurw.bookstore.bean.userMessage">
+  <insert id="insert" parameterType="com.pkurw.bookstore.bean.UserMessage">
     insert into user_message (user_id, create_Time, username, 
       gender)
     values (#{userId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR}, 
       #{gender,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.pkurw.bookstore.bean.userMessage">
+  <insert id="insertSelective" parameterType="com.pkurw.bookstore.bean.UserMessage">
     insert into user_message
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -135,43 +115,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.pkurw.bookstore.bean.userMessageExample" resultType="java.lang.Long">
-    select count(*) from user_message
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update user_message
-    <set>
-      <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=INTEGER},
-      </if>
-      <if test="record.createTime != null">
-        create_Time = #{record.createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.username != null">
-        username = #{record.username,jdbcType=VARCHAR},
-      </if>
-      <if test="record.gender != null">
-        gender = #{record.gender,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update user_message
-    set user_id = #{record.userId,jdbcType=INTEGER},
-      create_Time = #{record.createTime,jdbcType=TIMESTAMP},
-      username = #{record.username,jdbcType=VARCHAR},
-      gender = #{record.gender,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pkurw.bookstore.bean.userMessage">
+  <update id="updateByPrimaryKeySelective" parameterType="com.pkurw.bookstore.bean.UserMessage">
     update user_message
     <set>
       <if test="createTime != null">
@@ -186,7 +130,7 @@
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.pkurw.bookstore.bean.userMessage">
+  <update id="updateByPrimaryKey" parameterType="com.pkurw.bookstore.bean.UserMessage">
     update user_message
     set create_Time = #{createTime,jdbcType=TIMESTAMP},
       username = #{username,jdbcType=VARCHAR},

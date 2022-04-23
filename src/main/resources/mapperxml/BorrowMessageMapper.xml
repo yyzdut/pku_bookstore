@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pkurw.bookstore.mapper.borrowMessageMapper">
-  <resultMap id="BaseResultMap" type="com.pkurw.bookstore.bean.borrowMessage">
+<mapper namespace="com.pkurw.bookstore.mapper.BorrowMessageMapper">
+  <resultMap id="BaseResultMap" type="com.pkurw.bookstore.bean.BorrowMessage">
     <id column="borrow_id" jdbcType="INTEGER" property="borrowId" />
     <result column="book_id" jdbcType="INTEGER" property="bookId" />
     <result column="brrow_time" jdbcType="TIMESTAMP" property="brrowTime" />
@@ -70,20 +70,6 @@
   <sql id="Base_Column_List">
     borrow_id, book_id, brrow_time, return_time, user_id, book_number
   </sql>
-  <select id="selectByExample" parameterType="com.pkurw.bookstore.bean.borrowMessageExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from borrow_message
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -94,13 +80,7 @@
     delete from borrow_message
     where borrow_id = #{borrowId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.pkurw.bookstore.bean.borrowMessageExample">
-    delete from borrow_message
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.pkurw.bookstore.bean.borrowMessage">
+  <insert id="insert" parameterType="com.pkurw.bookstore.bean.BorrowMessage">
     insert into borrow_message (borrow_id, book_id, brrow_time, 
       return_time, user_id, book_number
       )
@@ -108,7 +88,7 @@
       #{returnTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}, #{bookNumber,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.pkurw.bookstore.bean.borrowMessage">
+  <insert id="insertSelective" parameterType="com.pkurw.bookstore.bean.BorrowMessage">
     insert into borrow_message
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="borrowId != null">
@@ -151,51 +131,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.pkurw.bookstore.bean.borrowMessageExample" resultType="java.lang.Long">
-    select count(*) from borrow_message
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update borrow_message
-    <set>
-      <if test="record.borrowId != null">
-        borrow_id = #{record.borrowId,jdbcType=INTEGER},
-      </if>
-      <if test="record.bookId != null">
-        book_id = #{record.bookId,jdbcType=INTEGER},
-      </if>
-      <if test="record.brrowTime != null">
-        brrow_time = #{record.brrowTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.returnTime != null">
-        return_time = #{record.returnTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=INTEGER},
-      </if>
-      <if test="record.bookNumber != null">
-        book_number = #{record.bookNumber,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update borrow_message
-    set borrow_id = #{record.borrowId,jdbcType=INTEGER},
-      book_id = #{record.bookId,jdbcType=INTEGER},
-      brrow_time = #{record.brrowTime,jdbcType=TIMESTAMP},
-      return_time = #{record.returnTime,jdbcType=TIMESTAMP},
-      user_id = #{record.userId,jdbcType=INTEGER},
-      book_number = #{record.bookNumber,jdbcType=INTEGER}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pkurw.bookstore.bean.borrowMessage">
+  <update id="updateByPrimaryKeySelective" parameterType="com.pkurw.bookstore.bean.BorrowMessage">
     update borrow_message
     <set>
       <if test="bookId != null">
@@ -216,7 +152,7 @@
     </set>
     where borrow_id = #{borrowId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.pkurw.bookstore.bean.borrowMessage">
+  <update id="updateByPrimaryKey" parameterType="com.pkurw.bookstore.bean.BorrowMessage">
     update borrow_message
     set book_id = #{bookId,jdbcType=INTEGER},
       brrow_time = #{brrowTime,jdbcType=TIMESTAMP},
