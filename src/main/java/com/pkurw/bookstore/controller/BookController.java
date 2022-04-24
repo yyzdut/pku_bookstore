@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author yuyizhe <yyz@stu.pku.edu.cn>
+ * Created on 2022-04-20
+ * @description：首页书籍界面
+ */
 @RestController
 @RequestMapping("/book")
 @Api(tags = "首页显示书籍")

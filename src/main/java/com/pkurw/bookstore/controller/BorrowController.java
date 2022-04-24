@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author yuyizhe <yyz@stu.pku.edu.cn>
+ * Created on 2022-04-20
+ * @description：借书接口
+ */
 @RestController
 @RequestMapping("/borrow")
 @Api(tags = "用户借书")
