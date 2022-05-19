@@ -78,15 +78,20 @@
   </select>
   <select id="selectByBookName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
+      book_id, bname, book_number, author, status, book_amount
     from book_message
-    where book_name = #{bookName,jdbcType=VARCHAR}
+    where bname = #{bookName,jdbcType=VARCHAR}
   </select>
   <select id="selectByBookAuthor" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from book_message
     where author = #{Author,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from book_message
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from book_message

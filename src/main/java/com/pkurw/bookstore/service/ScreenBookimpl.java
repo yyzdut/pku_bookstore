@@ -6,6 +6,7 @@ import com.pkurw.bookstore.mapper.BookMessageMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class ScreenBookimpl implements ScreenBook {
 
     @Override
     public Result<List<BookMessage>> getBookMessageByName(String bookName) {
-        List<BookMessage> list;
+        List<BookMessage> list = new ArrayList<>();
         list = bookMessageMapper.selectByBookName(bookName);
         Result result = new Result();
         result.setSuccess(true);
@@ -32,6 +33,16 @@ public class ScreenBookimpl implements ScreenBook {
     public Result<List<BookMessage>> getBookMessageByAuthor(String Author) {
         List<BookMessage> list;
         list = bookMessageMapper.selectByBookAuthor(Author);
+        Result result = new Result();
+        result.setSuccess(true);
+        result.setDetail(list);
+        return result;
+    }
+
+    @Override
+    public Result<List<BookMessage>> getBookMessageAll() {
+        List<BookMessage> list;
+        list = bookMessageMapper.selectAll("aaa");
         Result result = new Result();
         result.setSuccess(true);
         result.setDetail(list);

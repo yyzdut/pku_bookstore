@@ -6,9 +6,9 @@ import com.pkurw.bookstore.service.ScreenBook;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author yuyizhe <yyz@stu.pku.edu.cn>
@@ -25,13 +25,22 @@ public class BookController {
 
     @ApiOperation(value = "通过书籍名称查找书籍，显示在首页")
     @PostMapping("/byname")
-    public Result getBookByName(String bookName) {
-        return screenBook.getBookMessageByName(bookName);
+    public Result<List<BookMessage>> getBookByName(@RequestBody String bookName) {
+        System.out.println("successful");
+        Result<List<BookMessage>> result = screenBook.getBookMessageByName(bookName);
+        System.out.println(bookName);
+        return result;
     }
 
     @ApiOperation(value = "通过作者名称查找书籍，显示在首页")
     @PostMapping("/byauthor")
-    public Result getBookByAuthor(String bookAuthor) {
+    public Result<List<BookMessage>> getBookByAuthor(String bookAuthor) {
         return screenBook.getBookMessageByAuthor(bookAuthor);
+    }
+
+    @ApiOperation(value = "全部")
+    @RequestMapping("/all")
+    public Result<List<BookMessage>> getBookAll() {
+        return screenBook.getBookMessageAll();
     }
 }

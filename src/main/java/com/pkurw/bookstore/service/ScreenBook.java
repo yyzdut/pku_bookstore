@@ -18,4 +18,6 @@ public interface ScreenBook {
     Result<List<BookMessage>> getBookMessageByName(String BookName);
 
     Result<List<BookMessage>> getBookMessageByAuthor(String Author);
+
+    Result<List<BookMessage>> getBookMessageAll();
 }
